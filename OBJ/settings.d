@@ -87,4 +87,3 @@
 ..\obj\settings.o: ..\GUI\memo.h
 ..\obj\settings.o: ..\GUI\window.h
 ..\obj\settings.o: ..\APP\calendar.h
-..\obj\settings.o: ..\APP\mainui.h

@@ -1,9 +1,6 @@
 #include "common.h"
-#include "mainui.h"
-#include "appplay.h"
 #include "settings.h"
-#include "calendar.h"	 
-#include "paint.h"
+#include "calendar.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板
@@ -700,14 +697,6 @@ u8 app_system_file_check(u8* diskx)
 	if(!f_check||!path)rval=0XFF;//申请失败
 	while(rval==0)
 	{	
-		//主界面图标检测,9个. 
- 		for(i=0;i<9;i++)
-		{
-			app_system_file_chgdisk(path,diskx,(u8*)mui_icos_path_tbl[i]); 
-	 		res=f_open(f_check,(const TCHAR*)path,FA_READ);//只读方式打开文件
-			if(res)break;		//打开失败   
-			f_close(f_check);    //关闭文件  
-		}
 		rval+=i;
 		if(i<9){rval++;break;}   
 		//COMMON文件检测,5个
@@ -751,14 +740,6 @@ u8 app_system_file_check(u8* diskx)
 		if(res)break;			//打开失败      
     	f_close(f_check);		//关闭文件     
 		rval++;	      
-		//检测应用程序16个图标
-   		for(i=0;i<16;i++)
-		{
-			app_system_file_chgdisk(path,diskx,(u8*)appplay_icospath_tbl[i]); 
-	 		res=f_open(f_check,(const TCHAR*)path,FA_READ);//只读方式打开文件
-			if(res)break;		//打开失败       
-			f_close(f_check);    //关闭文件  
-		}
 		rval+=i;
 		if(i<16)break;
 		printf("\r\ntotal system files:%d\r\n",rval);

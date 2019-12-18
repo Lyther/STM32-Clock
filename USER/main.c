@@ -1,15 +1,7 @@
 #include "includes.h"
 #include "common.h"
-#include "mainui.h"
-#include "ebook.h"
-#include "picviewer.h"
-#include "appplay.h"
-#include "usbplay.h"
 #include "calendar.h"
 #include "settings.h"
-#include "paint.h"
-#include "wirelessplay.h"
-#include "notepad.h"
 #include "mass_mal.h"
 #include "usb_lib.h"
 #include "hw_config.h"
@@ -400,28 +392,6 @@ REINIT:
 		}
 		LCD_Fill(5, ypos + fsize * j, lcddev.width, ypos + fsize * (j + 1), BLACK);
 		LCD_ShowString(5, ypos + fsize * j, lcddev.width, lcddev.height, fsize, "Font Check...");
-	}
-	LCD_ShowString(5 + okoffset, ypos + fsize * j++, lcddev.width, lcddev.height, fsize, "OK");
-
-	// System file check
-	LCD_ShowString(5, ypos + fsize * j, lcddev.width, lcddev.height, fsize, "SYSTEM Files Check...");
-	while (app_system_file_check("1")) {
-		LCD_Fill(5, ypos + fsize * j, lcddev.width, ypos + fsize * (j + 1), BLACK);
-		LCD_ShowString(5, ypos + fsize * j, (fsize / 2) * 8, fsize, fsize, "Updating");
-		app_boot_cpdmsg_set(5, ypos + fsize * j, fsize);
-		if (app_system_file_check("0")) {
-			res = system_usb_update_confirm(5, ypos + fsize * (j + 1), fsize);
-			if (res)
-				goto REINIT;
-			system_error_show(5, ypos + fsize * (j + 1), "SYSTEM File Error!", fsize);
-		} else if (app_system_update(app_boot_cpdmsg))
-			system_error_show(5, ypos + fsize * (j + 1), "SYSTEM File Error!", fsize);
-		LCD_Fill(5, ypos + fsize * j, lcddev.width, ypos + fsize * (j + 1), BLACK);
-		LCD_ShowString(5, ypos + fsize * j, lcddev.width, lcddev.height, fsize, "SYSTEM Files Check...");
-		if (app_system_file_check("1"))
-			system_error_show(5, ypos + fsize * (j + 1), "SYSTEM File Lost!", fsize);
-		else
-			break;
 	}
 	LCD_ShowString(5 + okoffset, ypos + fsize * j++, lcddev.width, lcddev.height, fsize, "OK");
 

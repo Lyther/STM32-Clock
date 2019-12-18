@@ -85,8 +85,5 @@
 ..\obj\common.o: ..\GUI\edit.h
 ..\obj\common.o: ..\GUI\memo.h
 ..\obj\common.o: ..\GUI\window.h
-..\obj\common.o: ..\APP\mainui.h
-..\obj\common.o: ..\APP\appplay.h
 ..\obj\common.o: ..\APP\settings.h
 ..\obj\common.o: ..\APP\calendar.h
-..\obj\common.o: ..\APP\paint.h

@@ -86,16 +86,8 @@
 ..\obj\main.o: ..\GUI\edit.h
 ..\obj\main.o: ..\GUI\memo.h
 ..\obj\main.o: ..\GUI\window.h
-..\obj\main.o: ..\APP\mainui.h
-..\obj\main.o: ..\APP\ebook.h
-..\obj\main.o: ..\APP\picviewer.h
-..\obj\main.o: ..\APP\appplay.h
-..\obj\main.o: ..\APP\usbplay.h
 ..\obj\main.o: ..\APP\calendar.h
 ..\obj\main.o: ..\APP\settings.h
-..\obj\main.o: ..\APP\paint.h
-..\obj\main.o: ..\APP\wirelessplay.h
-..\obj\main.o: ..\APP\notepad.h
 ..\obj\main.o: ..\USB\CONFIG\mass_mal.h
 ..\obj\main.o: ..\USB\LIB\usb_lib.h
 ..\obj\main.o: ..\USB\CONFIG\hw_config.h

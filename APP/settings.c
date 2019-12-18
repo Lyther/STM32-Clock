@@ -1,7 +1,6 @@
 #include "settings.h"
 #include "rtc.h" 	   
-#include "calendar.h" 	
-#include "mainui.h"
+#include "calendar.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板
@@ -848,7 +847,6 @@ u8 sysset_play(void)
 	{
 		printf("sysset save!\r\n");
 		sysset_save_para(&systemset);	//保存系统设置信息
-		mui_init(0); 					//Main UI 初始化		
 	} 
 	if(savemask&1<<2)//闹钟数据改动了
 	{
@@ -861,25 +859,3 @@ u8 sysset_play(void)
 	}
 	return res;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
