@@ -26,11 +26,22 @@ Project File Date:  12/18/2019
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling calendar.c...
+compiling main.c...
+main.c(545): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        if (strcmp("alarm on", USART_RX_BUF) == 0) {
+main.c(548): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        } else if (strcmp("alarm off", USART_RX_BUF) == 0) {
+main.c(551): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        } else if (start_with("set", USART_RX_BUF)) {
+main.c(555): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        } else if (strcmp("timer on", USART_RX_BUF) == 0) {
+main.c(558): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                        } else if (strcmp("timer off", USART_RX_BUF) == 0) {
+main.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=88806 RO-data=11230 RW-data=844 ZI-data=44404  
+Program Size: Code=96422 RO-data=12894 RW-data=860 ZI-data=44404  
 FromELF: creating hex file...
-"..\OBJ\TEST.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\TEST.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE

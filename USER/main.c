@@ -506,11 +506,13 @@ void main_task(void *pdata)
 {
 	u8 key;
 	LCD_Clear(BLACK);
+	ai_load_picfile("1:/PICTURE/Dio_Fanservice.jpg",0,0,lcddev.width,lcddev.height,1);
 	while (1) {
 		system_task_return = 0;
 		if (setmode) {
 			sysset_play();
 			LCD_Clear(BLACK);
+			ai_load_picfile("1:/PICTURE/Dio_Fanservice.jpg",0,0,lcddev.width,lcddev.height,1);
 			setmode = 0;
 		}
 		key = KEY_Scan(0);
@@ -518,10 +520,12 @@ void main_task(void *pdata)
 		case KEY1_PRES:
 			calendar_play();
 			LCD_Clear(BLACK);
+			ai_load_picfile("1:/PICTURE/Dio_Fanservice.jpg",0,0,lcddev.width,lcddev.height,1);
 			break;
 		case KEY0_PRES:
 			sysset_play();
 			LCD_Clear(BLACK);
+			ai_load_picfile("1:/PICTURE/Dio_Fanservice.jpg",0,0,lcddev.width,lcddev.height,1);
 			break;
 		}
 		delay_ms(10);
