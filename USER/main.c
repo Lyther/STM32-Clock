@@ -548,6 +548,12 @@ void usart_task(void *pdata) {
 				char buf[31];
 				memcpy(buf, &USART_RX_BUF[4], 31);
 				set_time(buf);
+			} else if (strcmp("timer on", USART_RX_BUF) == 0) {
+				timer.ringsta |= 1 << 7;
+				printf("Set timer on\r\n");
+			} else if (strcmp("timer off", USART_RX_BUF) == 0) {
+				timer.ringsta &= ~(1 << 7);
+				printf("Set timer off\r\n");
 			}
 		}
 		USART_RX_STA = 0;
@@ -556,6 +562,11 @@ void usart_task(void *pdata) {
 			alarmtimse++;
 			if (alarmtimse > 30)
 				alarm.ringsta &= ~(1 << 7);
+		} else if (timer.ringsta & 1 << 7) {
+			calendar_alarm_ring(timer.ringsta & 0x3);
+			alarmtimse++;
+			if (alarmtimse > 30)
+				timer.ringsta &= ~(1 << 7);
 		} else if (alarmtimse) {
 			alarmtimse = 0;
 			LED1 = 1;
@@ -569,7 +580,7 @@ void watch_task(void *pdata) {
 	pdata = pdata;
 	KEY_Init();
 	while (1) {
-		if (alarm.ringsta & 1 << 7)
+		if ((alarm.ringsta & 1 << 7) || (timer.ringsta & 1 << 7))
 			calendar_alarm_msg((lcddev.width - 44) / 2, (lcddev.height - 20) / 2);
 		if (t == 200) {
 			LED0 = 0;

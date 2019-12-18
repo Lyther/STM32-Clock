@@ -1,27 +1,11 @@
 #include "settings.h"
 #include "rtc.h" 	   
 #include "calendar.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//APP-设置 代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2014/7/20
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-//*******************************************************************************
-//修改信息
-//无
-////////////////////////////////////////////////////////////////////////////////// 	   
- 
-_system_setings systemset;	  
-#define SYS_MENU_SIZE 			6		//条目个数	
-	 
-//系统设置主目录表
-u8*const sysset_mmenu_tbl[GUI_LANGUAGE_NUM][SYS_MENU_SIZE]=//系统一级目录的个数
+
+_system_setings systemset;
+#define SYS_MENU_SIZE 7
+
+u8*const sysset_mmenu_tbl[GUI_LANGUAGE_NUM][SYS_MENU_SIZE]=
 {
 	{
 	"1.时间设置",
@@ -29,7 +13,8 @@ u8*const sysset_mmenu_tbl[GUI_LANGUAGE_NUM][SYS_MENU_SIZE]=//系统一级目录的个数
 	"3.闹钟时间设置",
 	"4.闹钟开关设置",
 	"5.闹钟提示设置",
-	"6.语言设置"
+	"6.计时器设置",
+	"7.语言设置"
 	},
 	{			   								
 	"1.時間設置",
@@ -37,7 +22,8 @@ u8*const sysset_mmenu_tbl[GUI_LANGUAGE_NUM][SYS_MENU_SIZE]=//系统一级目录的个数
 	"3.鬧鐘時間設置",
 	"4.鬧鐘開關設置",
 	"5.鬧鐘提示設置",
-	"6.語言設置"
+	"6.計時器設置",
+	"7.語言設置"
 	}, 	 
 	{
 	"1.TIME SET",
@@ -45,92 +31,22 @@ u8*const sysset_mmenu_tbl[GUI_LANGUAGE_NUM][SYS_MENU_SIZE]=//系统一级目录的个数
 	"3.ALARM TIME SET",
 	"4.ALARM ON/OFF SET",
 	"5.ALARM RING SET",
-	"6.LANGUAGE SET"
+	"6.TIMER SET",
+	"7.LANGUAGE SET"
 	},
 };	    
-//语言设置列表
+
 u8*const sysset_language_tbl[GUI_LANGUAGE_NUM]=
 {
 	"简体中文","繁體中文","English",
 };  	    
-//铃声设置列表
+
 u8*const sysset_ring_tbl[GUI_LANGUAGE_NUM][4]=
 {
 {"DS1闪烁1","DS1闪烁2","DS1闪烁3","DS1闪烁4",},
 {"DS1閃爍1","DS1閃爍2","DS1閃爍3","DS1閃爍4",},
 {"DS1 FLASH 1","DS1 FLASH 2","DS1 FLASH 3","DS1 FLASH 4",},	 
 };
-//音乐/图片播放模式设置列表
-u8*const sysset_avplaymode_tbl[GUI_LANGUAGE_NUM][3]=
-{
-{"全部循环","随机播放","单曲循环"},
-{"全部循環","隨機播放","單曲循環"},
-{"LOOP PLAY","SHUFFLE PLAY","SINGLE PLAY"},
-};  
-//系统设置相关提示信息 
-u8*const sysset_system_remaindmsg_tbl[3][GUI_LANGUAGE_NUM]=
-{
-{"您确认更新系统文件?","您確認更新系統文件?","Are you sure to update?"},
-{"您确认恢复默认设置?","您確認恢復默認設置?","Are you sure to restore?"},
-{"恢复默认设置中...","恢復默認設置中...","Default set restoring...",},
-};
-//系统更新复制提示信息
-u8*const sysset_system_update_cpymsg_tbl[2][GUI_LANGUAGE_NUM]=
-{
-{"正在复制:","正在複製:"," Copying:",},
-{"当前文件夹:","當前文件夾:","Cur Folder:",},
-}; 
-//系统更新提示
-u8*const sysset_system_update_msg_tbl[GUI_LANGUAGE_NUM]=
-{"系统正在更新...","系統正在更新...","SYSTEM Updating..."};
-//系统更新结果提示
-u8*const sysset_system_update_err_tbl[3][GUI_LANGUAGE_NUM]=
-{
-{"系统文件更新成功!","系統文件更新成功!","SYSTEM file lost!",},
-{"系统文件丢失!","系統文件丟失!","SYSTEM file lost!",},
-{"用户终止更新!","用戶終止更新!","User stop update!",},
-};
-//系统信息标注表
-u8*const sysset_system_info_caption_tbl[9][GUI_LANGUAGE_NUM]=
-{
-{"处理器:","處理器:","CPU:"},
-{"内存:","內存:","RAM:"},
-{"SD卡:","SD卡:","SD Card:"},
-{"FLASH盘:","FLASH盤:","FLASH Disk:"}, 
-{"操作系统:","操作系統:","OS:"},
-{"图形界面:","圖形界面:","GUI:"},
-{"硬件平台:","硬件平臺:","Hardware:"},
-{"版权信息:","版權信息:","Copyright:"},
-{"技术支持:","技術支持:","Tech Support:"},
-};
-//系统提示信息表
-u8*const sysset_system_info_msg_tbl[9]=
-{
-"STM32F103RCT6 @ 72Mhz",
-"48KB",
-"MB",
-"KB", 
-"uCOS II ",
-"ALIENTEK GUI ",
-"ALIENTEK MiniSTM32 V3",
-"广州星翼电子",
-"www.openedv.com",
-}; 
-//系统状提示信息
-u8*const sysset_sysstatus_tbl[3][GUI_LANGUAGE_NUM]=
-{
-{"CPU使用率:","CPU使用率:","CPU USAGE:",},
-{"内部内存使用率:","内部内存使用率:","IN MEMORY USAGE:",}, 
-{"温度:","溫度:","TEMP:"},
-};
-
-//系统关于提示信息
-u8*const sysset_system_about_caption_tbl[2][GUI_LANGUAGE_NUM]=
-{
-{"ALEINTEK 迷你","ALIENTEK 迷你","ALENTEK Mini",},
-{"产品序列号","產品序列號","Serial Number",},
-}; 
-////////////////////////////////////////////////////////////////////////////////////////////
 
 #define SYSSET_BTN1_WIDTH			50			//一类按键宽度(加减按钮)
 #define SYSSET_BTN1_HEIGHT			40			//一类按键高度(加减按钮)
@@ -249,10 +165,8 @@ u8 sysset_time_set(u16 x,u16 y,u8 *hour,u8 *min,u8*caption)
 					}
 					app_show_nummid(x+20,y+42+41,SYSSET_EDIT_WIDTH,SYSSET_EDIT_HEIGHT,*hour,2,16,BLACK,SYSSET_EDIT_BACK_COLOR);
 					app_show_nummid(x+20+60,y+42+41,SYSSET_EDIT_WIDTH,SYSSET_EDIT_HEIGHT,*min,2,16,BLACK,SYSSET_EDIT_BACK_COLOR);  
-
 				}
 			}
-			
 		}
  	}
 	window_delete(twin);				//删除窗口
@@ -414,313 +328,6 @@ u8 sysset_date_set(u16 x,u16 y,u16 *year,u8 *month,u8 *date,u8*caption)
 	if(rval==0XFF)return 0;
 	return rval;
 }	  
-//用于外部设置坐标
-u16 cpymsg_x;
-u16 cpymsg_y;
- //系统启动的时候,用于显示更新进度
-//*pname:更新文件名字
-//pct:百分比
-//mode:模式
-//[0]:更新文件名
-//[1]:更新百分比pct
-//[2]:更新文件夹
-//[3~7]:保留
-//返回值:0,正常;
-//       1,结束复制			  
-u8 sysset_system_update_cpymsg(u8*pname,u8 pct,u8 mode)
-{		
-	u16 filled; 
-	if(system_task_return)return 1;//TPAD返回	
-	if(mode&0X01)//显示文件名
-	{  
- 		gui_phy.back_color=APP_WIN_BACK_COLOR;
-		gui_fill_rectangle(cpymsg_x+10+9*6,cpymsg_y+32+15,126,12,APP_WIN_BACK_COLOR);		//填充底色  0XE73C 
- 		gui_show_string(pname,cpymsg_x+10+9*6,cpymsg_y+32+15,126,12,12,BLACK);				//显示新的文件名	
-   		gui_show_string((u8*)sysset_system_update_cpymsg_tbl[1][gui_phy.language],cpymsg_x+10,cpymsg_y+32+15+21,66,12,12,BLACK);	
- 	}
-	if(mode&0X04)//显示文件夹名
-	{
- 		gui_phy.back_color=APP_WIN_BACK_COLOR;
-		gui_fill_rectangle(cpymsg_x+10+11*6,cpymsg_y+32+15+21,114,12,APP_WIN_BACK_COLOR);	//填充底色  0XE73C 
- 		gui_show_string(pname,cpymsg_x+10+11*6,cpymsg_y+32+15+21,114,12,12,BLACK);			//显示新的文件夹名	
-	}
-	if(mode&0X02)//更新百分比
-	{
-		if(pct>100)pct=100;
-	    filled=pct;
-		filled=(filled*9)/5;
-		gui_fill_rectangle(cpymsg_x+10,cpymsg_y+32+15+21*2,filled,16,0X071F);				//填充占用了的百分比部分     
-		gui_fill_rectangle(cpymsg_x+10+filled,cpymsg_y+32+15+21*2,180-filled,16,WHITE);		//填充未占用的百分比部分  
-		gui_show_num(cpymsg_x+10+72,cpymsg_y+32+15+21*2+2,3,BLACK,12,pct,1);				//显示更新进度
-		gui_show_string("%",cpymsg_x+10+72+18,cpymsg_y+32+15+21*2+2,6,12,12,BLACK);			//显示百分号
-  	}
-	delay_ms(1000/OS_TICKS_PER_SEC);//延时一个时钟节拍
-	return 0;	
-}
-//更新系统文件夹
-//caption:标题
-void sysset_system_update(u8*caption,u16 sx,u16 sy)
-{
-  	_window_obj* twin=0;			//窗体
-	u8 res;
-	u8 *p;  
-	res=app_system_file_check("0");
-  	if(res)
-	{
-		p=(u8*)sysset_system_update_err_tbl[1][gui_phy.language];	//系统文件丢失
-		window_msg_box(sx,sy+20,200,80,p,APP_REMIND_CAPTION_TBL[gui_phy.language],12,0,0,0);
-		delay_ms(1500);
-		system_task_return=0;//取消TPAD
-		return;
-	}
-	twin=window_creat(sx,sy,200,120,0,1,16);//创建窗口
-  	if(twin!=NULL)
-	{
-		//窗口的名字和背景色
-		twin->caption=caption;
-		twin->windowbkc=APP_WIN_BACK_COLOR;	
- 		window_draw(twin);						//画出窗体
-		gui_phy.back_color=APP_WIN_BACK_COLOR;
-  		gui_show_string((u8*)sysset_system_update_cpymsg_tbl[0][gui_phy.language],sx+10,sy+32+15,54,12,12,BLACK);	//正在复制:
-  		gui_show_string((u8*)sysset_system_update_cpymsg_tbl[1][gui_phy.language],sx+10,sy+32+15+21,66,12,12,BLACK);//当前文件夹:
- 		gui_draw_rectangle(sx+10-1,sy+32+15+21*2-1,182,18,0X4A49);		//画边框
-		gui_fill_rectangle(sx+10,sy+32+15+21*2,180,16,WHITE);			//填充底色  0XE73C 
-		gui_show_num(sx+10+72,sy+32+15+21*2+2,3,BLACK,12,0,1);			//显示更新进度
-		gui_show_string("%",sx+10+72+18,sy+32+15+21*2+2,6,12,12,BLACK);	//显示百分号
-		cpymsg_x=sx;
-		cpymsg_y=sy;
-		res=app_system_update(sysset_system_update_cpymsg);				//从SD卡更新
-	   	p=(u8*)sysset_system_update_err_tbl[0][gui_phy.language];		//更新成功提示
- 		if(res==0XFF)p=(u8*)sysset_system_update_err_tbl[2][gui_phy.language];	//强制退出
-		else if(res)p=(u8*)sysset_system_update_err_tbl[1][gui_phy.language];	//系统文件丢失
-  		window_msg_box(sx,sy+20,200,80,p,APP_REMIND_CAPTION_TBL[gui_phy.language],12,0,0,0);
-		delay_ms(1500); 
-	}
-	window_delete(twin);
-	system_task_return=0;//取消TPAD
-}  
-//显示系统信息
-//x,y:起始坐标
-//宽度:200,高度:272.
-//caption:标题
-void sysset_system_info(u16 x,u16 y,u8*caption)
-{
-  	_window_obj* twin=0;			//窗体
- 	_btn_obj * rbtn=0;				//返回按钮		  
-	u8 rval=0;
-	u8 *msgbuf;
-	u8 numstrbuf[6];
- 	u8 i;
-	u32 dtsize,dfsize; 
-	msgbuf=mymalloc(31);			//申请31个字节
-  	twin=window_creat(x,y,200,272,0,1|1<<5,16);//创建窗口
- 	rbtn=btn_creat(x+50,y+32+10+20*9+10,SYSSET_BTN3_WIDTH,SYSSET_BTN2_HEIGHT,0,0x02);//创建按钮
-  	if(twin!=NULL&&rbtn!=NULL)
-	{
-		//窗口的名字和背景色
-		twin->caption=caption;
-		twin->windowbkc=APP_WIN_BACK_COLOR;	
- 		//返回按钮的颜色    
-		rbtn->bkctbl[0]=0X8452;//边框颜色
-		rbtn->bkctbl[1]=0XAD97;//第一行的颜色				
-		rbtn->bkctbl[2]=0XAD97;//上半部分颜色
-		rbtn->bkctbl[3]=0X8452;//下半部分颜色
- 		rbtn->caption=(u8*)GUI_BACK_CAPTION_TBL[gui_phy.language];//标题为返回
-
- 		window_draw(twin);	//画出窗体	
-		btn_draw(rbtn);	  	//画按键
- 		gui_draw_rectangle(x+10-4,y+32+14-4,188,20*9,0X4A49);		//画边框
- 		gui_phy.back_color=APP_WIN_BACK_COLOR;
- 		rval=strlen((const char*)sysset_system_info_caption_tbl[0][gui_phy.language]);
-		for(i=0;i<9;i++)
-		{
-	 		strcpy((char*)msgbuf,(const char*)sysset_system_info_caption_tbl[i][gui_phy.language]);
-	 		if(i==2||i==3)//SD卡/FLASH盘  容量
-			{
-				dtsize=0;
-				dfsize=0;
-				if(i==2)
-				{
-					if(i==2)exf_getfree("0:",&dtsize,&dfsize);	//得到SD卡剩余容量和总容量
-					else exf_getfree("2:",&dtsize,&dfsize);		//得到SD卡剩余容量和总容量 
-					dtsize>>=10;
-					dfsize>>=10;
-				}else exf_getfree("1:",&dtsize,&dfsize);//得到FLASH盘剩余容量和总容量  
-  				gui_num2str(numstrbuf,dfsize);
-				strcat((char*)msgbuf,(const char*)numstrbuf);//增加空闲容量
-				if(i==2)strcat((char*)msgbuf,(const char*)"MB/");
-				else strcat((char*)msgbuf,(const char*)"KB/"); 
-				gui_num2str(numstrbuf,dtsize);
-				strcat((char*)msgbuf,(const char*)numstrbuf);//增加总容量	  
-			}
-			strcat((char*)msgbuf,(const char*)sysset_system_info_msg_tbl[i]);
-			if(i==4||i==5||i==6)
-			{									   
-				if(i==4)app_get_version(numstrbuf,OS_VERSION,3);	  	//OS版本
-				else if(i==5)app_get_version(numstrbuf,GUI_VERSION,3);	//GUI版本
-				else app_get_version(numstrbuf,HARDWARE_VERSION,2);		//硬件版本
-				strcat((char*)msgbuf,(const char*)numstrbuf);		 
- 			}     
-	   		gui_show_string(msgbuf,x+10,y+32+14+20*i,180,12,12,BLACK);//显示信息
-		} 
- 		while(1)
-		{
-			tp_dev.scan(0);    
-			in_obj.get_key(&tp_dev,IN_TYPE_TOUCH);	//得到按键键值   
-			delay_ms(1000/OS_TICKS_PER_SEC);		//延时一个时钟节拍
-	 		if(system_task_return)break;			//TPAD返回	
-			rval=btn_check(rbtn,&in_obj);			//返回按钮检测
-			if(rval&&(rbtn->sta&0X80)==0)break;	 	//有有效操作
-	 
-		}
- 	}
-	myfree(msgbuf);
-	window_delete(twin);
-	btn_delete(rbtn);
-	system_task_return=0;//取消TPAD
-}	  
-
-//显示系统状态
-//x,y:显示的坐标
-//宽度:200,高度:190.
-//caption:名称
-void sysset_system_status(u16 x,u16 y,u8* caption)
-{
-	u8 rval=0,res;
-	u8 i=0;
-	u16 temperate=0;
- 	_window_obj* twin=0;			//窗体
- 	_btn_obj * rbtn=0;				//返回按钮		  
-	_progressbar_obj * cpuprgb=0;	//CPU使用率进度条
-	_progressbar_obj * meminprgb=0;	//内部内存使用进度条 
-
- 	twin=window_creat(x,y,200,190,0,1|1<<5,16);					//创建窗口
-	cpuprgb=progressbar_creat(x+10,y+32+22,180,18,0X61);		//创建进度条
-	meminprgb=progressbar_creat(x+10,y+32+22+45,180,18,0X61);	//创建进度条
-	rbtn=btn_creat(x+50,y+32+22+45+38,SYSSET_BTN3_WIDTH,SYSSET_BTN2_HEIGHT,0,0x02);//创建按钮
- 	if(twin==NULL||cpuprgb==NULL||meminprgb==NULL||rbtn==NULL)rval=1;
-	else
-	{
-		//窗口的名字和背景色
-		twin->caption=caption;
-		twin->windowbkc=APP_WIN_BACK_COLOR;	
-		//返回按钮的颜色    
-		rbtn->bkctbl[0]=0X8452;	//边框颜色
-		rbtn->bkctbl[1]=0XAD97;	//第一行的颜色				
-		rbtn->bkctbl[2]=0XAD97;	//上半部分颜色
-		rbtn->bkctbl[3]=0X8452;	//下半部分颜色
-
-		rbtn->caption=(u8*)GUI_BACK_CAPTION_TBL[gui_phy.language];//标题为返回
-
-		cpuprgb->totallen=100; 			//最大是100
-		meminprgb->totallen=100;    	//最大是100
-														 
- 		window_draw(twin);						//画出窗体
-		btn_draw(rbtn);							//画按钮
-
-		gui_show_string((u8*)sysset_sysstatus_tbl[0][gui_phy.language],x+10,y+32+5,190,12,12,SYSSET_INWIN_FONT_COLOR);		//显示CPU使用率
- 		gui_show_string((u8*)sysset_sysstatus_tbl[1][gui_phy.language],x+10,y+32+5+45,190,12,12,SYSSET_INWIN_FONT_COLOR);	//显示内部内存使用率
- 		gui_show_string((u8*)sysset_sysstatus_tbl[2][gui_phy.language],x+200-10-36-36,y+32+5,190,12,12,SYSSET_INWIN_FONT_COLOR);//显示温度
- 		gui_show_string("℃",x+200-10-12,y+32+5,190,12,12,SYSSET_INWIN_FONT_COLOR);	//显示CPU当前温度
- 	}
- 	while(rval==0)
-	{
-		tp_dev.scan(0);    
-		in_obj.get_key(&tp_dev,IN_TYPE_TOUCH);	//得到按键键值   
-		delay_ms(1000/OS_TICKS_PER_SEC);		//延时一个时钟节拍
- 		if(system_task_return)break;			//需要返回	
-		res=btn_check(rbtn,&in_obj);			//返回按钮检测
-		if(res)
-		{
-			if((rbtn->sta&0X80)==0)//有有效操作
-			{
-				break;//退出
-			}
-		}	
-		if(i==0)//时间到了,更新内存,CPU等的状态
-		{
-			cpuprgb->curpos=OSCPUUsage;
-			meminprgb->curpos=mem_perused();//内部内存使用率
-
-			progressbar_draw_progressbar(cpuprgb);	//显示进度条
-			progressbar_draw_progressbar(meminprgb);//显示进度条
-			//显示温度值
-			temperate=Get_Temp();//得到内部温度
-			app_show_float(x+200-10-12,y+32+5,temperate,1,5,12,SYSSET_INWIN_FONT_COLOR,twin->windowbkc);//显示温度
-  			i=100;
-		}
-		i--;
-	}
-	window_delete(twin);			//删除窗口
-	btn_delete(rbtn);				//删除按钮	
-	progressbar_delete(cpuprgb);	//删除进度条
-	progressbar_delete(meminprgb);	//删除进度条
-	system_task_return=0;		 	//清除退出标志
-}
-//关于系统
-//caption:标题
-void sysset_system_about(u16 x,u16 y,u8*caption)
-{
-  	_window_obj* twin=0;			//窗体
- 	_btn_obj * rbtn=0;				//返回按钮		  
-	u8 rval=0;
- 	u32 sn0,sn1,sn2;
-	u8 *tbuf;		  
-	u8 verbuf[6];
-
- 	tbuf=mymalloc(31);					//申请31个字节
-  	twin=window_creat(x,y,200,262,0,1|1<<5,16);	//创建窗口
- 	rbtn=btn_creat(x+50,y+32+180+10,SYSSET_BTN3_WIDTH,SYSSET_BTN2_HEIGHT,0,0x02);//创建按钮
-  	if(twin!=NULL&&rbtn!=NULL)
-	{
-		//窗口的名字和背景色
-		twin->caption=caption;
-		twin->windowbkc=APP_WIN_BACK_COLOR;	
- 		//返回按钮的颜色    
-		rbtn->bkctbl[0]=0X8452;	//边框颜色
-		rbtn->bkctbl[1]=0XAD97;	//第一行的颜色				
-		rbtn->bkctbl[2]=0XAD97;	//上半部分颜色
-		rbtn->bkctbl[3]=0X8452;	//下半部分颜色
- 		rbtn->caption=(u8*)GUI_BACK_CAPTION_TBL[gui_phy.language];//标题为返回
-
- 		window_draw(twin);		//画出窗体	
-		btn_draw(rbtn);	  		//画按键
- 		gui_draw_rectangle(x+10-4,y+32+10+8,188,102,0X4A49);		//画边框
- 		gui_draw_rectangle(x+10-4,y+32+120+18,188,42,0X4A49);		//画边框
- 
-  		gui_phy.back_color=APP_WIN_BACK_COLOR;
-		gui_show_ptstr(x+10,y+32+10,x+10+180,y+32+10+16,0,BLACK,16,(u8*)sysset_system_about_caption_tbl[0][gui_phy.language],0);//ALIENTEK Mini
- 	 	strcpy((char*)tbuf,"HARDWARE:");
-		app_get_version(verbuf,HARDWARE_VERSION,2);
-		strcat((char*)tbuf,(const char*)verbuf);
-		strcat((char*)tbuf,", SOFTWARE:");						   
-		app_get_version(verbuf,SOFTWARE_VERSION,3);
-		strcat((char*)tbuf,(const char*)verbuf);
-  		gui_show_string(tbuf,x+10,y+32+34,180,12,12,BLACK);//显示信息
- 		gui_show_string("Copyright (C) 2015~2025",x+10,y+32+34+20*1,180,12,12,BLACK);//显示信息
- 		gui_show_string("广州星翼电子科技有限公司",x+10,y+32+34+20*2,180,12,12,BLACK);//显示信息
- 		gui_show_string("www.openedv.com",x+10,y+32+34+20*3,180,12,12,BLACK);//显示信息
- 
-  		gui_show_ptstr(x+10,y+32+120+10,x+10+180,y+32+120+10+16,0,BLACK,16,(u8*)sysset_system_about_caption_tbl[1][gui_phy.language],0);//产品序列号
-		app_getstm32_sn(&sn0,&sn1,&sn2);//得到序列号
-		sprintf((char*)tbuf,"SN:%X%X%X",sn0,sn1,sn2);
-		gui_show_string(tbuf,x+10,y+32+120+10+24,180,12,12,BLACK);//显示信息
-  		while(1)
-		{
-			tp_dev.scan(0);    
-			in_obj.get_key(&tp_dev,IN_TYPE_TOUCH);	//得到按键键值   
-			delay_ms(1000/OS_TICKS_PER_SEC);		//延时一个时钟节拍
-	 		if(system_task_return)calendar_play();			//TPAD返回	
-			rval=btn_check(rbtn,&in_obj);			//返回按钮检测
-			if(rval&&(rbtn->sta&0X80)==0)break;	 	//有有效操作
-	 
-		}
- 	}
-	myfree(tbuf);
-	window_delete(twin);
-	btn_delete(rbtn);
-	system_task_return=0;//取消TPAD
-} 
 
 //查找条目名字
 //mcaption:主目录下的目录名(一定要有'.'字符在里面)
@@ -828,7 +435,18 @@ u8 sysset_play(void)
 						savemask|=1<<2;//标记闹钟数据改动了
 					}   
 					break;
-				case 5://语言设置
+				case 5:
+					temp1 = timer.minute;
+					temp2 = timer.second;
+					res = sysset_time_set((lcddev.width-150)/2,(lcddev.height-200)/2, (u8*)&temp1, (u8*)&temp2, scaption);
+					if (res == 0) {
+						timer.minute = temp1;
+						timer.second = temp2;
+						calendar_timer_init(&alarm, &timer);
+						savemask |= 1 << 3;
+					}
+					break;
+				case 6://语言设置
 					temp1=gui_phy.language;//得到之前的设置
 			 		res=app_items_sel((lcddev.width-180)/2,(lcddev.height-192)/2,180,72+40*3,(u8**)sysset_language_tbl,3,(u8*)&temp1,0X90,scaption);//单选
 					if(res==0)//设置成功
@@ -841,21 +459,22 @@ u8 sysset_play(void)
 					} 
 					break; 
 			}
-  		}else break;//有错误发生了	 			   
+  		} else break;//有错误发生了	 			   
 	}
-	if(savemask&1<<0)//系统设置数据改动了
-	{
+	if(savemask & 1 << 0) {
 		printf("sysset save!\r\n");
-		sysset_save_para(&systemset);	//保存系统设置信息
-	} 
-	if(savemask&1<<2)//闹钟数据改动了
-	{
+		sysset_save_para(&systemset);
+	}
+	if(savemask & 1 << 2) {
 		printf("alarm save!\r\n");
-		calendar_save_para(&alarm);		//保存闹钟设置信息 
-	}   
-	if(tlanguage!=gui_phy.language)		//语言发生了改变
-	{
-		LCD_Clear(BLACK); 
+		calendar_save_para(&alarm);
+	}
+	if (savemask & 1 << 3) {
+		printf("timer save!\r\n");
+		timer_save_para(&timer);
+	}
+	if(tlanguage!=gui_phy.language) {
+		LCD_Clear(BLACK);
 	}
 	return res;
 }

@@ -1,5 +1,7 @@
 # STM32-Clock
 
+This project is already well done, but I still want to add some functions that are cool! All the objects are already compiled. Use serial download tool to download ./OBJ/TEST.hex into board. If you find any bugs, please raise an issue.
+
 Use STM32F103RC to realize digital clock, implement the following functions:
 * Show both digital clock and circle clock, which would in the same panel.
 * Time upadte and refresh by second.
@@ -8,9 +10,9 @@ Use STM32F103RC to realize digital clock, implement the following functions:
 * Set alarm time and date.
 * Use command to set time and date.
 * Wake up LED light when alarm time reach.
+* Realize counting down timer.
 
 The following functions are in plan but not realize:
-* Realize counting down timer.
 * GUI optimization.
 * Welcome message (or instructions) shown on main panel.
 
@@ -23,7 +25,6 @@ Write executable file object into STM32F103 chip, when the system initialized, u
 1. clock panel:
 	* key wake_up to back.
 	* key 1 goes into setting panel.
-	* key 0 initialize counting down timer.(TODO)
 
 2. setting panel:
 	* key wake_up to back.

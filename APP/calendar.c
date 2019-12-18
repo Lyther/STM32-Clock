@@ -7,25 +7,12 @@
 #include "rtc.h" 
 #include "led.h" 
 #include "key.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//APP-日历 代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2014/7/20
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-//*******************************************************************************
-//修改信息
-//无
-////////////////////////////////////////////////////////////////////////////////// 	   
 
 u8 is_alarm_set = 0;
+u8 is_timer_set = 0;
 _alarm_obj alarm;		//闹钟结构体
 _calendar_obj calendar;	//日历结构体
+_timer_obj timer;
 
 static u16 TIME_TOPY;		//	120
 static u16 OTHER_TOPY;		//	200 	
@@ -87,41 +74,52 @@ void calendar_alarm_ring(u8 type) {
 	}
 }
 
+void calendar_timer_init(_alarm_obj *alarmx, _timer_obj *timerx) {
+	timerx->ringsta = alarmx->ringsta & ~(1 << 7);
+	is_timer_set = 1;
+}
+
 void calendar_date_refresh(void) {
  	u8 weekn;
 	u16 offx=(lcddev.width-240)/2;
- 	//显示阳历年月日
-	POINT_COLOR=GRED; 
-	BACK_COLOR=BLACK; 
-	LCD_ShowxNum(offx+5,OTHER_TOPY+9,(calendar.w_year/100)%100,2,16,0);//显示年  20/19  
-	LCD_ShowxNum(offx+21,OTHER_TOPY+9,calendar.w_year%100,2,16,0);     //显示年  
-	LCD_ShowString(offx+37,OTHER_TOPY+9,lcddev.width,lcddev.height,16,"-"); //"-"
-	LCD_ShowxNum(offx+45,OTHER_TOPY+9,calendar.w_month,2,16,0X80);     //显示月
-	LCD_ShowString(offx+61,OTHER_TOPY+9,lcddev.width,lcddev.height,16,"-"); //"-"
-	LCD_ShowxNum(offx+69,OTHER_TOPY+9,calendar.w_date,2,16,0X80);      //显示日	  
-	//显示周几?
+	// Display date
+	POINT_COLOR=GRED;
+	BACK_COLOR=BLACK;
+	LCD_ShowxNum(offx+5,OTHER_TOPY+9,(calendar.w_year/100)%100,2,16,0);
+	LCD_ShowxNum(offx+21,OTHER_TOPY+9,calendar.w_year%100,2,16,0);
+	LCD_ShowString(offx+37,OTHER_TOPY+9,lcddev.width,lcddev.height,16,"-");
+	LCD_ShowxNum(offx+45,OTHER_TOPY+9,calendar.w_month,2,16,0X80);
+	LCD_ShowString(offx+61,OTHER_TOPY+9,lcddev.width,lcddev.height,16,"-");
+	LCD_ShowxNum(offx+69,OTHER_TOPY+9,calendar.w_date,2,16,0X80);
+	// Display week
 	POINT_COLOR=MAGENTA;
-    weekn=calendar.week;
-	Show_Str(5+offx,OTHER_TOPY+35,lcddev.width,lcddev.height,(u8 *)calendar_week_table[gui_phy.language][weekn],16,0); //显示周几?	
-													 
+  weekn=calendar.week;
+	Show_Str(5+offx,OTHER_TOPY+35,lcddev.width,lcddev.height,(u8 *)calendar_week_table[gui_phy.language][weekn],16,0);
 }
-//闹钟数据保存在:SYSTEM_PARA_SAVE_BASE+sizeof(_system_setings)+sizeof(_vs10xx_obj)
-//读取日历闹钟信息
-//alarm:闹钟信息 
-void calendar_read_para(_alarm_obj * alarm)
-{
+
+void calendar_read_para(_alarm_obj * alarm) {
 	AT24CXX_Read(SYSTEM_PARA_SAVE_BASE+sizeof(_system_setings),(u8*)alarm,sizeof(_alarm_obj));
 }
-//写入日历闹钟信息
-//alarm:闹钟信息 
-void calendar_save_para(_alarm_obj * alarm)
-{
-  	OS_CPU_SR cpu_sr=0;
-	alarm->ringsta&=0X7F;	//清空最高位
-	OS_ENTER_CRITICAL();	//进入临界区(无法被中断打断) 
+
+void calendar_save_para(_alarm_obj * alarm) {
+  OS_CPU_SR cpu_sr=0;
+	alarm->ringsta&=0X7F;
+	OS_ENTER_CRITICAL();
 	AT24CXX_Write(SYSTEM_PARA_SAVE_BASE+sizeof(_system_setings),(u8*)alarm,sizeof(_alarm_obj));
-	OS_EXIT_CRITICAL();		//退出临界区(可以被中断打断)
-} 
+	OS_EXIT_CRITICAL();
+}
+
+void timer_read_para(_timer_obj* timer) {
+	AT24CXX_Read(SYSTEM_PARA_SAVE_BASE+sizeof(_system_setings)+sizeof(_alarm_obj),(u8*)timer,sizeof(_timer_obj));
+}
+
+void timer_save_para(_timer_obj* timer) {
+	OS_CPU_SR cpu_sr = 0;
+	timer->ringsta &= 0X7F;
+	OS_ENTER_CRITICAL();
+	AT24CXX_Write(SYSTEM_PARA_SAVE_BASE+sizeof(_system_setings)+sizeof(_alarm_obj),(u8*)timer,sizeof(_timer_obj));
+	OS_EXIT_CRITICAL();
+}
 
 u8 calendar_alarm_msg(u16 x,u16 y) {
 	u8 rval = 0;
@@ -131,9 +129,9 @@ u8 calendar_alarm_msg(u16 x,u16 y) {
 		app_read_bkcolor(x, y, 44, 20, lcdbuf);
 		gui_fill_rectangle(x, y, 44, 20, WHITE);
 		gui_draw_rectangle(x, y, 44, 20, BLUE);
-		gui_show_num(x+2, y+2, 2, RED, 16, alarm.hour, 0X81);
+		gui_show_num(x+2, y+2, 2, RED, 16, calendar.hour, 0X81);
  		gui_show_ptchar(x+2+16, y+2, x+2+16+8, y+2+16, 0, RED, 16, ':', 1);
-		gui_show_num(x+2+24, y+2, 2, RED, 16, alarm.min, 0X81);
+		gui_show_num(x+2+24, y+2, 2, RED, 16, calendar.min, 0X81);
   	OSTaskSuspend(6);
 		while (rval == 0) {
 			tp_dev.scan(0);
@@ -150,6 +148,7 @@ u8 calendar_alarm_msg(u16 x,u16 y) {
 	} else rval = 1;
 	system_task_return = 0;
 	alarm.ringsta &= ~(1<<7);
+	timer.ringsta &= ~(1<<7);
 	calendar_alarm_init((_alarm_obj*) &alarm, &calendar);
 	gui_memin_free(lcdbuf);
 	OSTaskResume(6);
@@ -282,7 +281,6 @@ void calendar_circle_clock_showtime(u16 x,u16 y,u16 size,u16 d,u8 hour,u8 min,u8
 u8 calendar_play(void)
 {
 	u8 second=0;
-	u8 t=0;
 	u8 tempdate=0;
 	u8 rval=0;			//返回值	
 	u8 res;
@@ -360,27 +358,40 @@ u8 calendar_play(void)
 		} else if (key == WKUP_PRES) system_task_return = 1;
 		if(system_task_return) break;
  		if(second!=calendar.sec) {
-  		second=calendar.sec;  
-			calendar_circle_clock_showtime(lcddev.width/2,yoff+r,r*2,d,calendar.hour,calendar.min,calendar.sec);//指针时钟显示时间		
-			gui_phy.back_color=BLACK;
-			gui_show_num(xoff+10,TIME_TOPY,2,GREEN,60,calendar.hour,0X80);	//显示时
-			gui_show_num(xoff+90,TIME_TOPY,2,GREEN,60,calendar.min,0X80);	//显示分
-			gui_show_num(xoff+170,TIME_TOPY,2,GREEN,60,calendar.sec,0X80);	//显示秒 					   
-			if(t % 2 == 0) { // Display alarm time
-				if (is_alarm_set) POINT_COLOR = GBLUE;
-				else POINT_COLOR = LGRAY;
-				gui_show_num(xoff+90,OTHER_TOPY,2,POINT_COLOR,60,alarm.hour,0X80);
-				gui_show_ptchar(xoff+150,OTHER_TOPY,lcddev.width,lcddev.height,0,POINT_COLOR,60,':',0);
-				gui_show_num(xoff+170,OTHER_TOPY,2,POINT_COLOR,60,alarm.min,0X80);
-				if(t > 0) t = 0;
+  		second=calendar.sec;
+			if (is_timer_set) { // Counting down timer
+				timer.second--;
+				if (timer.second == 0) {
+					if (timer.minute > 0) {
+						timer.minute--;
+						timer.second = 59;
+					} else {
+						timer.ringsta |= 1 << 7;
+						is_timer_set = 0;
+					}
+				}
 			}
+			
+			calendar_circle_clock_showtime(lcddev.width/2,yoff+r,r*2,d,calendar.hour,calendar.min,calendar.sec);
+			gui_phy.back_color=BLACK;
+			gui_show_num(xoff+10,TIME_TOPY,2,GREEN,60,calendar.hour,0X80);
+			gui_show_num(xoff+90,TIME_TOPY,2,GREEN,60,calendar.min,0X80);
+			gui_show_num(xoff+170,TIME_TOPY,2,GREEN,60,calendar.sec,0X80);
+			
+			if (is_timer_set) POINT_COLOR = RED;
+			else POINT_COLOR = GRAY;
+			gui_show_num(xoff+90,OTHER_TOPY,2,POINT_COLOR,60,timer.minute,0X80);
+			gui_show_ptchar(xoff+150,OTHER_TOPY,lcddev.width,lcddev.height,0,POINT_COLOR,60,':',0);
+			gui_show_num(xoff+170,OTHER_TOPY,2,POINT_COLOR,60,timer.second,0X80);
+			
 			if (calendar.w_date != tempdate) {
-				calendar_date_refresh();	//天数变化了,更新日历.  
-				tempdate = calendar.w_date;	//修改tempdate，防止重复进入
+				calendar_date_refresh();
+				tempdate = calendar.w_date;
 			}
 			if (is_alarm_set && calendar.hour == alarm.hour && calendar.min == alarm.min && calendar.sec == 0) // Process alarm
 				alarm.ringsta |= 1 << 7;
-			t++;
+			if (is_timer_set && timer.minute == 0 && timer.second == 0) // Process timer
+				timer.ringsta |= 1 << 7;
  		} 
 		delay_ms(10);
  	};
