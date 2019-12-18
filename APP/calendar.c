@@ -22,7 +22,8 @@
 //修改信息
 //无
 ////////////////////////////////////////////////////////////////////////////////// 	   
- 
+
+u8 is_alarm_set = 0;
 _alarm_obj alarm;		//闹钟结构体
 _calendar_obj calendar;	//日历结构体
 
@@ -48,19 +49,19 @@ u8*const calendar_alarm_realarm_table[GUI_LANGUAGE_NUM]=
 u8*const calendar_loading_str[GUI_LANGUAGE_NUM][3]=
 {
 {
-	"正在加载,请稍候...",
-	"未检测到DS18B20!",
-	"启用内部温度传感器...",
+	"欢迎使用电子时钟",
+	"闹钟已设定！",
+	"正在读取当前时间...",
 },
 {
-	"正在加载,请稍候...",
-	"未检测到DS18B20!",
-	"启用内部温度传感器...",
+	"歡迎使用電子時鐘",
+	"鬧鐘已設定！",
+	"正在讀取當前時間...",
 },
 {
-	"Loading...",
-	"DS18B20 Check Failed!",
-	"Start Internal Sensor...",
+	"Welcome to STM32 Clock",
+	"Alarm is already set!",
+	"Getting RTC Time...",
 },
 };	 
 
@@ -72,7 +73,8 @@ void calendar_alarm_init(_alarm_obj *alarmx,_calendar_obj *calendarx) {
 	if (alarmx->weekmask & temp) {
 		printf("alarm:%d-%d-%d %d:%d\r\n", calendarx->w_year, calendarx->w_month, calendarx->w_date, alarmx->hour, alarmx->min);
 		RTC_Alarm_Set(calendarx->w_year, calendarx->w_month, calendarx->w_date, alarmx->hour, alarmx->min, 0);
-	}
+		is_alarm_set = 1;
+	} else is_alarm_set = 0;
 }
 
 void calendar_alarm_ring(u8 type) {
@@ -89,7 +91,7 @@ void calendar_date_refresh(void) {
  	u8 weekn;
 	u16 offx=(lcddev.width-240)/2;
  	//显示阳历年月日
-	POINT_COLOR=BRED; 
+	POINT_COLOR=GRED; 
 	BACK_COLOR=BLACK; 
 	LCD_ShowxNum(offx+5,OTHER_TOPY+9,(calendar.w_year/100)%100,2,16,0);//显示年  20/19  
 	LCD_ShowxNum(offx+21,OTHER_TOPY+9,calendar.w_year%100,2,16,0);     //显示年  
@@ -98,7 +100,7 @@ void calendar_date_refresh(void) {
 	LCD_ShowString(offx+61,OTHER_TOPY+9,lcddev.width,lcddev.height,16,"-"); //"-"
 	LCD_ShowxNum(offx+69,OTHER_TOPY+9,calendar.w_date,2,16,0X80);      //显示日	  
 	//显示周几?
-	POINT_COLOR=RED;
+	POINT_COLOR=MAGENTA;
     weekn=calendar.week;
 	Show_Str(5+offx,OTHER_TOPY+35,lcddev.width,lcddev.height,(u8 *)calendar_week_table[gui_phy.language][weekn],16,0); //显示周几?	
 													 
@@ -127,8 +129,8 @@ u8 calendar_alarm_msg(u16 x,u16 y) {
   lcdbuf = (u16*) gui_memin_malloc(44*20*2);
  	if (lcdbuf) {
 		app_read_bkcolor(x, y, 44, 20, lcdbuf);
-		gui_fill_rectangle(x, y, 44, 20, LIGHTBLUE);
-		gui_draw_rectangle(x, y, 44, 20, BROWN);
+		gui_fill_rectangle(x, y, 44, 20, WHITE);
+		gui_draw_rectangle(x, y, 44, 20, BLUE);
 		gui_show_num(x+2, y+2, 2, RED, 16, alarm.hour, 0X81);
  		gui_show_ptchar(x+2+16, y+2, x+2+16+8, y+2+16, 0, RED, 16, ':', 1);
 		gui_show_num(x+2+24, y+2, 2, RED, 16, alarm.min, 0X81);
@@ -166,7 +168,7 @@ void calendar_circle_clock_drawpanel(u16 x,u16 y,u16 size,u16 d)
 	u16 px0,px1;
 	u16 py0,py1; 
 	u16 i; 
-	gui_fill_circle(x,y,r,WHITE);		//画外圈
+	gui_fill_circle(x,y,r,YELLOW);		//画外圈
 	gui_fill_circle(x,y,r-4,BLACK);		//画内圈
 	for(i=0;i<60;i++)//画秒钟格
 	{ 
@@ -182,7 +184,7 @@ void calendar_circle_clock_drawpanel(u16 x,u16 y,u16 size,u16 d)
 		py0=sy+r-(r-5)*cos((app_pi/6)*i); 
 		px1=sx+r+(r-d)*sin((app_pi/6)*i); 
 		py1=sy+r-(r-d)*cos((app_pi/6)*i);  
-		gui_draw_bline1(px0,py0,px1,py1,2,YELLOW);		
+		gui_draw_bline1(px0,py0,px1,py1,2,RED);		
 	}
 	for(i=0;i<4;i++)//画3小时格
 	{ 
@@ -190,7 +192,7 @@ void calendar_circle_clock_drawpanel(u16 x,u16 y,u16 size,u16 d)
 		py0=sy+r-(r-5)*cos((app_pi/2)*i); 
 		px1=sx+r+(r-d-3)*sin((app_pi/2)*i); 
 		py1=sy+r-(r-d-3)*cos((app_pi/2)*i);  
-		gui_draw_bline1(px0,py0,px1,py1,2,YELLOW);		
+		gui_draw_bline1(px0,py0,px1,py1,2,RED);		
 	}
 	gui_fill_circle(x,y,d/2,WHITE);		//画中心圈
 }
@@ -253,7 +255,7 @@ void calendar_circle_clock_showtime(u16 x,u16 y,u16 size,u16 d,u8 hour,u8 min,u8
 	py0=sy+r-(r-3*d-7)*cos((app_pi/6)*temp); 
 	px1=sx+r+r1*sin((app_pi/6)*temp); 
 	py1=sy+r-r1*cos((app_pi/6)*temp); 
-	gui_draw_bline1(px0,py0,px1,py1,2,YELLOW); 
+	gui_draw_bline1(px0,py0,px1,py1,2,RED); 
 	//显示分钟 
 	r1=d/2+3; 
 	temp=(float)sec/60;
@@ -263,7 +265,7 @@ void calendar_circle_clock_showtime(u16 x,u16 y,u16 size,u16 d,u8 hour,u8 min,u8
 	py0=sy+r-(r-2*d-7)*cos((app_pi/30)*temp); 
 	px1=sx+r+r1*sin((app_pi/30)*temp); 
 	py1=sy+r-r1*cos((app_pi/30)*temp); 
-	gui_draw_bline1(px0,py0,px1,py1,1,GREEN); 	
+	gui_draw_bline1(px0,py0,px1,py1,1,YELLOW); 	
 	//显示秒钟  
 	r1=d/2+3;
 	//显示新的秒钟
@@ -271,7 +273,7 @@ void calendar_circle_clock_showtime(u16 x,u16 y,u16 size,u16 d,u8 hour,u8 min,u8
 	py0=sy+r-(r-d-7)*cos((app_pi/30)*sec); 
 	px1=sx+r+r1*sin((app_pi/30)*sec); 
 	py1=sy+r-r1*cos((app_pi/30)*sec); 
-	gui_draw_bline1(px0,py0,px1,py1,0,RED); 
+	gui_draw_bline1(px0,py0,px1,py1,0,WHITE); 
 	oldhour=hour;	//保存时
 	oldmin=min;		//保存分
 	oldsec=sec;		//保存秒
@@ -280,7 +282,6 @@ void calendar_circle_clock_showtime(u16 x,u16 y,u16 size,u16 d,u8 hour,u8 min,u8
 u8 calendar_play(void)
 {
 	u8 second=0;
-	short temperate=0;	//温度值		   
 	u8 t=0;
 	u8 tempdate=0;
 	u8 rval=0;			//返回值	
@@ -290,8 +291,6 @@ u8 calendar_play(void)
 	u16 yoff=0;	//表盘y偏移量
 	u16 r=0;	//表盘半径
 	u8 d=0;		//指针长度
-	  
-	u8 TEMP_SEN_TYPE=0;	//默认使用DS18B20
 	FIL* f_calendar=0;	 
 	
   	f_calendar=(FIL *)gui_memin_malloc(sizeof(FIL));//开辟FIL字节的内存区域 
@@ -315,14 +314,13 @@ u8 calendar_play(void)
 	{	  
  		LCD_Clear(BLACK);//清黑屏    	  
 		second=calendar.sec;//得到此刻的秒钟
-		POINT_COLOR=GBLUE;
+		POINT_COLOR=WHITE;
 		Show_Str(48,60,lcddev.width,lcddev.height,(u8*)calendar_loading_str[gui_phy.language][0],16,0x01); //显示进入信息	    
 		if(DS18B20_Init())
 		{
 			Show_Str(48,76,lcddev.width,lcddev.height,(u8*)calendar_loading_str[gui_phy.language][1],16,0x01);  
 			delay_ms(500);
-			Show_Str(48,92,lcddev.width,lcddev.height,(u8*)calendar_loading_str[gui_phy.language][2],16,0x01);  
-			TEMP_SEN_TYPE=1; 
+			Show_Str(48,92,lcddev.width,lcddev.height,(u8*)calendar_loading_str[gui_phy.language][2],16,0x01);
 		}   	    
 		delay_ms(1100);//等待1.1s 
 		BACK_COLOR= BLACK;
@@ -348,48 +346,41 @@ u8 calendar_play(void)
 		calendar_date_refresh();  //加载日历
 		tempdate=calendar.w_date;//天数暂存器 		
 		gui_phy.back_color=BLACK;
-		gui_show_ptchar(xoff+70-4,TIME_TOPY,lcddev.width,lcddev.height,0,GBLUE,60,':',0);	//":"
-		gui_show_ptchar(xoff+150-4,TIME_TOPY,lcddev.width,lcddev.height,0,GBLUE,60,':',0);	//":" 
+		gui_show_ptchar(xoff+70-4,TIME_TOPY,lcddev.width,lcddev.height,0,GREEN,60,':',0);	//":"
+		gui_show_ptchar(xoff+150-4,TIME_TOPY,lcddev.width,lcddev.height,0,GREEN,60,':',0);	//":" 
 	}
 	KEY_Init();
-  while(rval==0)
-	{	
-		RTC_Get();					//更新时间 
+	calendar_alarm_init(&alarm,&calendar);
+  while(rval==0) {
+		RTC_Get();
 		key = KEY_Scan(0);
 		if (key == KEY1_PRES) {
 			setmode = 1;
 			break;
 		} else if (key == WKUP_PRES) system_task_return = 1;
 		if(system_task_return) break;
- 		if(second!=calendar.sec)	//秒钟改变了
-		{ 	
-  			second=calendar.sec;  
+ 		if(second!=calendar.sec) {
+  		second=calendar.sec;  
 			calendar_circle_clock_showtime(lcddev.width/2,yoff+r,r*2,d,calendar.hour,calendar.min,calendar.sec);//指针时钟显示时间		
 			gui_phy.back_color=BLACK;
-			gui_show_num(xoff+10,TIME_TOPY,2,GBLUE,60,calendar.hour,0X80);	//显示时
-			gui_show_num(xoff+90,TIME_TOPY,2,GBLUE,60,calendar.min,0X80);	//显示分
-			gui_show_num(xoff+170,TIME_TOPY,2,GBLUE,60,calendar.sec,0X80);	//显示秒 					   
-			if(t%2==0)//等待2秒钟
-			{		 
-  				if(TEMP_SEN_TYPE)temperate=Get_Temp();//得到内部温度传感器的温度值,0.1℃
-				else temperate=DS18B20_Get_Temp();//得到18b20温度
-				if(temperate<0)//温度为负数的时候，红色显示
-				{
-					POINT_COLOR=RED;
-					temperate=-temperate;	//改为正温度
-				}else POINT_COLOR=BRRED;	//正常为棕红色字体显示		
-				gui_show_num(xoff+90,OTHER_TOPY,2,GBLUE,60,temperate/10,0X80);	//XX					   
-				gui_show_ptchar(xoff+150,OTHER_TOPY,lcddev.width,lcddev.height,0,GBLUE,60,'.',0);	//"." 
-				gui_show_ptchar(xoff+180-15,OTHER_TOPY,lcddev.width,lcddev.height,0,GBLUE,60,temperate%10+'0',0);//显示小数
-				gui_show_ptchar(xoff+210-10,OTHER_TOPY,lcddev.width,lcddev.height,0,GBLUE,60,95+' ',0);//显示℃
-				if(t>0)t=0;			 
-			}  	
-			if(calendar.w_date!=tempdate)
-			{
-				calendar_date_refresh();	//天数变化了,更新日历.  
-				tempdate=calendar.w_date;	//修改tempdate，防止重复进入
+			gui_show_num(xoff+10,TIME_TOPY,2,GREEN,60,calendar.hour,0X80);	//显示时
+			gui_show_num(xoff+90,TIME_TOPY,2,GREEN,60,calendar.min,0X80);	//显示分
+			gui_show_num(xoff+170,TIME_TOPY,2,GREEN,60,calendar.sec,0X80);	//显示秒 					   
+			if(t % 2 == 0) { // Display alarm time
+				if (is_alarm_set) POINT_COLOR = GBLUE;
+				else POINT_COLOR = LGRAY;
+				gui_show_num(xoff+90,OTHER_TOPY,2,POINT_COLOR,60,alarm.hour,0X80);
+				gui_show_ptchar(xoff+150,OTHER_TOPY,lcddev.width,lcddev.height,0,POINT_COLOR,60,':',0);
+				gui_show_num(xoff+170,OTHER_TOPY,2,POINT_COLOR,60,alarm.min,0X80);
+				if(t > 0) t = 0;
 			}
-			t++;   
+			if (calendar.w_date != tempdate) {
+				calendar_date_refresh();	//天数变化了,更新日历.  
+				tempdate = calendar.w_date;	//修改tempdate，防止重复进入
+			}
+			if (is_alarm_set && calendar.hour == alarm.hour && calendar.min == alarm.min && calendar.sec == 0) // Process alarm
+				alarm.ringsta |= 1 << 7;
+			t++;
  		} 
 		delay_ms(10);
  	};
@@ -401,23 +392,3 @@ u8 calendar_play(void)
 	BACK_COLOR=WHITE ;	
 	return rval;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

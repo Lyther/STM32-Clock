@@ -726,7 +726,6 @@ delay_ms(50); // delay 50 ms
 			}
  		}  	
 	}
- 	printf(" LCD ID:%x\r\n",lcddev.id); //¥Ú”°LCD ID  
 	if(lcddev.id==0X9341)	//9341≥ı ºªØ
 	{	 
 		LCD_WR_REG(0xCF);  

@@ -3,22 +3,7 @@
 #include "sys.h"
 #include "includes.h" 	   	 
 #include "common.h"    
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//APP-设置 代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2014/7/20
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved									  
-//*******************************************************************************
-//修改信息
-//无
-////////////////////////////////////////////////////////////////////////////////// 	   
- 
+
 //list结构体.链表结构
 __packed typedef struct 
 {
@@ -30,14 +15,10 @@ __packed typedef struct
 	u8 saveflag;			//保存标志,0X0A,保存过了;其他,还从未保存	   
 }_system_setings;
 
-extern _system_setings systemset;	//在settings.c里面设置 
+extern _system_setings systemset;
 
 u8 sysset_time_set(u16 x,u16 y,u8 *hour,u8 *min,u8*caption);
 u8 sysset_date_set(u16 x,u16 y,u16 *year,u8 *month,u8 *date,u8*caption);
-//void sysset_wm8978_vol3d_show(u16 x,u16 y,u8 mask,u8 val);
-//void sysset_wm8978_eq_show(u16 x,u16 y,u8 mask,u8 eqx,u8 val);
-//u8 sysset_wm8978_vol3d_set(u16 x,u16 y,_wm8978_obj *wmset,u8* caption);
-//u8 sysset_wm8978_eq_set(u16 x,u16 y,_wm8978_obj *wmset,u8 eqx,u8* caption);
 u8 sysset_bklight_set(u16 x,u16 y,u8* caption,u16 *bkval);
 u8 sysset_system_update_cpymsg(u8*pname,u8 pct,u8 mode);
 void sysset_system_update(u8*caption,u16 sx,u16 sy);
@@ -51,15 +32,3 @@ void sysset_save_para(_system_setings * sysset);
 u8 sysset_play(void);
 										   
 #endif
-
-
-
-
-
-
-
-
-
-
-
-

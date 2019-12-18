@@ -39,6 +39,69 @@ u8 wirelessmode = 0;
 volatile u8 setmode = 0;
 volatile u8 system_task_return = 0;
 
+u8 start_with(const char* pre, const char* str) {
+	u8 len_pre = strlen(pre);
+	u8 len_str = strlen(str);
+	return len_str < len_pre ? 0 : memcmp(pre, str, len_pre) == 0;
+}
+
+int str_to_int(const char* str) {
+	int result;
+	sscanf(str, "%d", &result);
+	return result;
+}
+
+void set_calendar(const char* time_t) {
+	char year[5], month[3], day[3], hour[3], minute[3], second[3];
+	int y, m, d, h, min, s;
+	memcpy(year, &time_t[0], 4);
+	year[4] = '\0';
+	memcpy(month, &time_t[4], 2);
+	month[2] = '\0';
+	memcpy(day, &time_t[6], 2);
+	day[2] = '\0';
+	memcpy(hour, &time_t[8], 2);
+	hour[2] = '\0';
+	memcpy(minute, &time_t[10], 2);
+	minute[2] = '\0';
+	memcpy(second, &time_t[12], 2);
+	second[2] = '\0';
+	y = str_to_int(year);
+	m = str_to_int(month);
+	d = str_to_int(day);
+	h = str_to_int(hour);
+	min = str_to_int(minute);
+	s = str_to_int(second);
+	RTC_Set(y,m,d,h,min,s);
+}
+
+void set_time(const char* str) {
+	char buf[31] = {0};
+	if (start_with("hour", str)) {
+		memcpy(buf, &str[5], 2);
+		RTC_Set(calendar.w_year,calendar.w_month,calendar.w_date,str_to_int(buf),calendar.min,calendar.sec);
+	} else if (start_with("minute", str)) {
+		memcpy(buf, &str[7], 2);
+		RTC_Set(calendar.w_year,calendar.w_month,calendar.w_date,calendar.hour,str_to_int(buf),calendar.sec);
+	} else if (start_with("second", str)) {
+		memcpy(buf, &str[7], 2);
+		RTC_Set(calendar.w_year,calendar.w_month,calendar.w_date,calendar.hour,calendar.min,str_to_int(buf));
+	} else if (start_with("year", str)) {
+		memcpy(buf, &str[5], 4);
+		RTC_Set(str_to_int(buf),calendar.w_month,calendar.w_date,calendar.hour,calendar.min,calendar.sec);
+	} else if (start_with("month", str)) {
+		memcpy(buf, &str[6], 2);
+		RTC_Set(calendar.w_year,str_to_int(buf),calendar.w_date,calendar.hour,calendar.min,calendar.sec);
+	} else if (start_with("day", str)) {
+		memcpy(buf, &str[4], 2);
+		RTC_Set(calendar.w_year,calendar.w_month,str_to_int(buf),calendar.hour,calendar.min,calendar.sec);
+	} else {
+		set_calendar(str);
+	}
+	delay_ms(10);
+	printf("Calendar time set to %d-%d-%d %d:%d:%d\r\n", calendar.w_year, calendar.w_month, calendar.w_date, calendar.hour, calendar.min, calendar.sec);
+}
+
 // Print error message
 void system_error_show(u16 x, u16 y, u8 *err, u8 fsize) {
 	POINT_COLOR = RED;
@@ -466,14 +529,32 @@ void main_task(void *pdata)
 }
 
 void usart_task(void *pdata) {
+	u8 len = 0;
 	u16 alarmtimse = 0;
 	pdata = pdata;
 	while (1) {
 		delay_ms(1000);
+		if (USART_RX_STA & 0x8000) {
+			len = USART_RX_STA & 0x3FFF;
+			USART_RX_BUF[len] = '\0';
+			printf("Receive command: %s\r\n", USART_RX_BUF);
+			if (strcmp("alarm on", USART_RX_BUF) == 0) {
+				alarm.ringsta |= 1 << 7;
+				printf("Set alarm on\r\n");
+			} else if (strcmp("alarm off", USART_RX_BUF) == 0) {
+				alarm.ringsta &= ~(1 << 7);
+				printf("Set alarm off\r\n");
+			} else if (start_with("set", USART_RX_BUF)) {
+				char buf[31];
+				memcpy(buf, &USART_RX_BUF[4], 31);
+				set_time(buf);
+			}
+		}
+		USART_RX_STA = 0;
 		if (alarm.ringsta & 1 << 7) {
 			calendar_alarm_ring(alarm.ringsta & 0x3);
 			alarmtimse++;
-			if (alarmtimse > 300)
+			if (alarmtimse > 30)
 				alarm.ringsta &= ~(1 << 7);
 		} else if (alarmtimse) {
 			alarmtimse = 0;

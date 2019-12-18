@@ -884,36 +884,6 @@
           <GroupName>APP</GroupName>
           <Files>
             <File>
-              <FileName>common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\common.c</FilePath>
-            </File>
-            <File>
-              <FileName>mainui.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\mainui.c</FilePath>
-            </File>
-            <File>
-              <FileName>ebook.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\ebook.c</FilePath>
-            </File>
-            <File>
-              <FileName>picviewer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\picviewer.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\usbplay.c</FilePath>
-            </File>
-            <File>
-              <FileName>appplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\appplay.c</FilePath>
-            </File>
-            <File>
               <FileName>calendar.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\calendar.c</FilePath>
@@ -924,19 +894,9 @@
               <FilePath>..\APP\settings.c</FilePath>
             </File>
             <File>
-              <FileName>paint.c</FileName>
+              <FileName>common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\APP\paint.c</FilePath>
-            </File>
-            <File>
-              <FileName>wirelessplay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\wirelessplay.c</FilePath>
-            </File>
-            <File>
-              <FileName>notepad.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\notepad.c</FilePath>
+              <FilePath>..\APP\common.c</FilePath>
             </File>
           </Files>
         </Group>

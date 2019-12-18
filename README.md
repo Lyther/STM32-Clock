@@ -6,12 +6,13 @@ Use STM32F103RC to realize digital clock, implement the following functions:
 * Set time and date by setting panel, using touch screen.
 * Set language of the panels.
 * Set alarm time and date.
-
-The following functions are in plan but not realize:
 * Use command to set time and date.
 * Wake up LED light when alarm time reach.
+
+The following functions are in plan but not realize:
 * Realize counting down timer.
 * GUI optimization.
+* Welcome message (or instructions) shown on main panel.
 
 ----
 
