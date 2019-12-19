@@ -28,7 +28,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x5DF99162)
 I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x5DF99162)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x5DF99162)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x5DF99162)
-I (..\APP\common.h)(0x5DF99C52)
+I (..\APP\common.h)(0x5DFBC19F)
 I (..\SYSTEM\sys\sys.h)(0x5DF99162)
 I (..\SYSTEM\sys\stm32f10x.h)(0x5DF99162)
 I (..\SYSTEM\usart\usart.h)(0x5DF99162)
@@ -84,8 +84,8 @@ I (..\GUI\filelistbox.h)(0x5DF99162)
 I (..\GUI\edit.h)(0x5DF99162)
 I (..\GUI\memo.h)(0x5DF99162)
 I (..\GUI\window.h)(0x5DF99162)
-I (..\APP\calendar.h)(0x5DFA265E)
-I (..\APP\settings.h)(0x5DF99AB2)
+I (..\APP\calendar.h)(0x5DFBBEEC)
+I (..\APP\settings.h)(0x5DFBBFF4)
 I (..\USB\CONFIG\mass_mal.h)(0x5DF99162)
 I (..\USB\LIB\usb_lib.h)(0x5DF99162)
 I (..\USB\CONFIG\hw_config.h)(0x5DF99162)
@@ -2096,8 +2096,8 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x5DF99162)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x5DF99162)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x5DF99162)
 F (..\ATKNCR\ATKNCR_M_V2.0.lib)(0x5DF99162)()
-F (..\APP\calendar.c)(0x5DFA2C0F)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\calendar.o --omf_browse ..\obj\calendar.crf --depend ..\obj\calendar.d)
-I (..\APP\calendar.h)(0x5DFA265E)
+F (..\APP\calendar.c)(0x5DFBBEAD)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\calendar.o --omf_browse ..\obj\calendar.crf --depend ..\obj\calendar.d)
+I (..\APP\calendar.h)(0x5DFBBEEC)
 I (..\SYSTEM\sys\sys.h)(0x5DF99162)
 I (..\SYSTEM\sys\stm32f10x.h)(0x5DF99162)
 I (..\CORE\core_cm3.h)(0x5DF99162)
@@ -2128,7 +2128,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5475F2FA)
 I (..\UCOSII\CORE\ucos_ii.h)(0x5DF99162)
 I (..\UCOSII\CONFIG\os_cfg.h)(0x5DF99162)
 I (..\UCOSII\PORT\os_cpu.h)(0x5DF99162)
-I (..\APP\common.h)(0x5DF99C52)
+I (..\APP\common.h)(0x5DFBC19F)
 I (..\SYSTEM\usart\usart.h)(0x5DF99162)
 I (..\SYSTEM\delay\delay.h)(0x5DF99162)
 I (..\HARDWARE\LED\led.h)(0x5DF99162)
@@ -2182,10 +2182,10 @@ I (..\GUI\filelistbox.h)(0x5DF99162)
 I (..\GUI\edit.h)(0x5DF99162)
 I (..\GUI\memo.h)(0x5DF99162)
 I (..\GUI\window.h)(0x5DF99162)
-I (..\APP\settings.h)(0x5DF99AB2)
+I (..\APP\settings.h)(0x5DFBBFF4)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5475F2FE)
-F (..\APP\settings.c)(0x5DFA292C)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\settings.o --omf_browse ..\obj\settings.crf --depend ..\obj\settings.d)
-I (..\APP\settings.h)(0x5DF99AB2)
+F (..\APP\settings.c)(0x5DFBBFCB)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\settings.o --omf_browse ..\obj\settings.crf --depend ..\obj\settings.d)
+I (..\APP\settings.h)(0x5DFBBFF4)
 I (..\SYSTEM\sys\sys.h)(0x5DF99162)
 I (..\SYSTEM\sys\stm32f10x.h)(0x5DF99162)
 I (..\CORE\core_cm3.h)(0x5DF99162)
@@ -2216,7 +2216,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5475F2FA)
 I (..\UCOSII\CORE\ucos_ii.h)(0x5DF99162)
 I (..\UCOSII\CONFIG\os_cfg.h)(0x5DF99162)
 I (..\UCOSII\PORT\os_cpu.h)(0x5DF99162)
-I (..\APP\common.h)(0x5DF99C52)
+I (..\APP\common.h)(0x5DFBC19F)
 I (..\SYSTEM\usart\usart.h)(0x5DF99162)
 I (..\SYSTEM\delay\delay.h)(0x5DF99162)
 I (..\HARDWARE\LED\led.h)(0x5DF99162)
@@ -2270,9 +2270,9 @@ I (..\GUI\filelistbox.h)(0x5DF99162)
 I (..\GUI\edit.h)(0x5DF99162)
 I (..\GUI\memo.h)(0x5DF99162)
 I (..\GUI\window.h)(0x5DF99162)
-I (..\APP\calendar.h)(0x5DFA265E)
-F (..\APP\common.c)(0x5DF9C700)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\common.o --omf_browse ..\obj\common.crf --depend ..\obj\common.d)
-I (..\APP\common.h)(0x5DF99C52)
+I (..\APP\calendar.h)(0x5DFBBEEC)
+F (..\APP\common.c)(0x5DFBC14C)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\common.o --omf_browse ..\obj\common.crf --depend ..\obj\common.d)
+I (..\APP\common.h)(0x5DFBC19F)
 I (..\SYSTEM\sys\sys.h)(0x5DF99162)
 I (..\SYSTEM\sys\stm32f10x.h)(0x5DF99162)
 I (..\CORE\core_cm3.h)(0x5DF99162)
@@ -2356,8 +2356,8 @@ I (..\GUI\filelistbox.h)(0x5DF99162)
 I (..\GUI\edit.h)(0x5DF99162)
 I (..\GUI\memo.h)(0x5DF99162)
 I (..\GUI\window.h)(0x5DF99162)
-I (..\APP\settings.h)(0x5DF99AB2)
-I (..\APP\calendar.h)(0x5DFA265E)
+I (..\APP\settings.h)(0x5DFBBFF4)
+I (..\APP\calendar.h)(0x5DFBBEEC)
 F (..\USB\LIB\usb_core.c)(0x5DF99162)(-c --cpu Cortex-M3 -g -O2 --apcs=interwork --split_sections -I..\USER -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USMART -I..\HARDWARE\LED -I..\HARDWARE\KEY -I..\HARDWARE\EXTI -I..\HARDWARE\WDG -I..\HARDWARE\TIMER -I..\HARDWARE\OLED -I..\HARDWARE\LCD -I..\HARDWARE\RTC -I..\HARDWARE\WKUP -I..\HARDWARE\ADC -I..\HARDWARE\DAC -I..\HARDWARE\DMA -I..\HARDWARE\24CXX -I..\HARDWARE\FLASH -I..\HARDWARE\SPI -I..\HARDWARE\TOUCH -I..\HARDWARE\NRF24L01 -I..\HARDWARE\REMOTE -I..\HARDWARE\DS18B20 -I..\HARDWARE\PS2 -I..\HARDWARE\STMFLASH -I..\HARDWARE\SD -I..\MALLOC -I..\FATFS\src -I..\FATFS\exfuns -I..\TEXT -I..\PICTURE -I..\UCOSII\CORE -I..\UCOSII\PORT -I..\UCOSII\CONFIG -I..\USB\LIB -I..\USB\CONFIG -I..\T9INPUT -I..\ATKNCR -I..\GUI -I..\APP -I..\STM32F10x_FWLib\inc -I..\USER -I..\CORE-I "F:\Documents\Reference Materials\Lesson Materials\Embedded Systems\STM32-Clock\USER\RTE"-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usb_core.o --omf_browse ..\obj\usb_core.crf --depend ..\obj\usb_core.d)
 I (..\USB\LIB\usb_lib.h)(0x5DF99162)
 I (..\USB\CONFIG\hw_config.h)(0x5DF99162)
